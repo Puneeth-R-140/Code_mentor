@@ -62,14 +62,34 @@ npm install
 cd ..
 ```
 
-3. **Setup Groq API**
+3. **Setup Groq API Key**
+   
+   **Step 3a:** Get your free API key
    - Go to https://console.groq.com/
-   - Sign up for a free account
-   - Create an API key
-   - Add your key to `server/.env`:
+   - Sign up for a free account (no credit card required)
+   - Click "Create API Key"
+   - Copy your API key (starts with `gsk_...`)
+   
+   **Step 3b:** Create the `.env` file
+   ```bash
+   # Navigate to server folder
+   cd server
+   
+   # Copy the example file to create .env
+   # On Windows:
+   copy .env.example .env
+   
+   # On Mac/Linux:
+   cp .env.example .env
+   ```
+   
+   **Step 3c:** Add your API key
+   - Open `server/.env` in any text editor
+   - Replace `your-groq-api-key-here` with your actual API key:
      ```
-     GROQ_API_KEY=your-api-key-here
+     GROQ_API_KEY=gsk_your_actual_key_here
      ```
+   - Save the file
 
 4. **Start the application**
 ```bash
