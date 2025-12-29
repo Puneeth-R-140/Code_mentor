@@ -12,9 +12,11 @@ app.use(bodyParser.json());
 // Routes
 const analyzeRoute = require('./routes/analyze');
 const executeRoute = require('./routes/execute');
+const chatRoute = require('./routes/chat');
 
 app.use('/api/analyze', analyzeRoute);
 app.use('/api/execute', executeRoute);
+app.use('/api/chat', chatRoute);
 
 // Health Check
 app.get('/', (req, res) => {

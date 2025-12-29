@@ -10,14 +10,26 @@ An intelligent C++ code mentoring system that provides real-time feedback, memor
 
 ## 🌟 Features
 
+### Core Features
 - **Real-Time AI Analysis**: Instant C++ code feedback powered by Groq's ultra-fast inference
 - **Memory Safety Checks**: Detects memory leaks, pointer errors, and buffer overflows
 - **3-Level Hint System**: Progressive hints (Nudge → Clue → Strategy)
 - **Advanced Error Detection**: Catches logic errors, undefined behavior, RAII violations, and subtle bugs
+- **Code Execution**: Run C++ code with custom input using Piston API
 - **Monaco Editor**: Professional VS Code-style editor with C++ syntax highlighting
-- **Premium Dark Theme**: Beautiful, eye-friendly interface
 - **Intelligent Fallback**: Works offline with C++-specific pattern-based heuristics
+
+### New Advanced Features ✨
+- **⌨️ Keyboard Shortcuts**: Ctrl+Enter (Run), Ctrl+Shift+H (Hint), Ctrl+K (Clear)
+- **🧪 Multiple Test Cases**: Add, manage, and run multiple test cases with pass/fail indicators
+- **💬 AI Chat Assistant**: Ask questions about your code with context-aware responses
+- **📊 Complexity Analysis**: Time/Space complexity (Big O), quality score, optimization suggestions
+- **🎨 Modern UI**: Professional teal/cyan theme with tabbed interface
+
+### Performance
 - **14,400 Free Requests/Day**: Generous Groq free tier
+- **Fast Execution**: Code runs in ~1-2 seconds
+- **Real-time Analysis**: AI responses in 2-3 seconds
 
 ## 🏗️ Architecture
 
@@ -329,6 +341,187 @@ For issues or questions, open an issue on GitHub or contact the maintainer.
 
 ---
 
+## 🚀 Quick Start Guide (Step-by-Step)
+
+### First Time Setup
+
+1. **Get Groq API Key** (Free, 2 minutes)
+   - Visit https://console.groq.com/
+   - Sign up (no credit card needed)
+   - Click "Create API Key"
+   - Copy the key (starts with `gsk_`)
+
+2. **Clone & Install**
+   ```bash
+   git clone <your-repo-url>
+   cd "Code helper"
+   npm install
+   cd server && npm install && cd ..
+   ```
+
+3. **Configure API Key**
+   ```bash
+   cd server
+   copy .env.example .env    # Windows
+   # OR
+   cp .env.example .env      # Mac/Linux
+   ```
+   
+   Edit `server/.env` and add your key:
+   ```
+   GROQ_API_KEY=gsk_your_actual_key_here
+   ```
+
+4. **Run the App**
+   ```bash
+   # Terminal 1
+   cd server
+   npm run dev
+   
+   # Terminal 2 (new terminal)
+   cd "Code helper"
+   npm run dev
+   ```
+
+5. **Open Browser**
+   - Go to http://localhost:5173
+   - You're ready! 🎉
+
+---
+
+## 💡 Feature Guide
+
+### ⌨️ Keyboard Shortcuts
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl + Enter` | Run code instantly |
+| `Ctrl + Shift + H` | Get AI hint/analysis |
+| `Ctrl + K` | Clear editor to template |
+
+### 🧪 Multiple Test Cases
+1. Click **"+ Add"** button
+2. Enter **Input** (e.g., `5 10`)
+3. Enter **Expected Output** (e.g., `15`)
+4. Click **"Run All"** to test
+5. See ✅ or ❌ for each test
+
+**Example:**
+```
+Test 1: Input: "5 10" → Expected: "15" → ✅ Passed
+Test 2: Input: "100 200" → Expected: "300" → ✅ Passed
+```
+
+### 💬 AI Chat Assistant
+1. Click **"Chat"** tab (right panel)
+2. Ask questions:
+   - "What does this code do?"
+   - "How can I optimize this?"
+   - "What's wrong with my pointer?"
+3. Get instant AI responses
+4. Continue conversation
+
+### 📊 Complexity Analysis
+1. Write your code
+2. Click **"Get Hint"**
+3. Switch to **"Complexity"** tab
+4. View:
+   - Time Complexity (Big O)
+   - Space Complexity (Big O)
+   - Code Quality Score (1-10)
+   - Optimization Suggestions
+
+**Example Output:**
+```
+Time: O(n²)
+Space: O(1)
+Quality: 7/10
+Suggestions:
+• Use hash map for O(n) time
+• Consider std::vector
+```
+
+---
+
+## 🎯 Common Use Cases
+
+### Testing with Multiple Inputs
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a, b;
+    cin >> a >> b;
+    cout << (a + b) << endl;
+    return 0;
+}
+```
+
+**Test Cases:**
+- Input: `5 10` → Expected: `15`
+- Input: `-5 5` → Expected: `0`
+- Input: `100 200` → Expected: `300`
+
+### Getting AI Help
+**Your Code:**
+```cpp
+int* ptr = new int[100];
+// ... use ptr
+```
+
+**Ask Chat:** "What's wrong with this code?"
+
+**AI Response:** "Memory leak! You allocated with `new[]` but never called `delete[]`. Use smart pointers or add cleanup."
+
+---
+
+## 🔧 Troubleshooting
+
+### Backend Won't Start
+```bash
+# Check if port 3000 is in use
+# Windows:
+netstat -ano | findstr :3000
+
+# Mac/Linux:
+lsof -i :3000
+
+# Kill the process or change port in server/index.js
+```
+
+### Frontend Won't Start
+```bash
+# Check if port 5173 is in use
+# Clear cache and reinstall
+rm -rf node_modules package-lock.json
+npm install
+```
+
+### API Key Issues
+- ✅ Check `.env` file exists in `server/` folder
+- ✅ Verify key starts with `gsk_`
+- ✅ No quotes around the key
+- ✅ Restart backend after changing `.env`
+
+### Features Not Working
+1. **Test Cases not running?** → Backend must be running
+2. **Chat not responding?** → Check Groq API key
+3. **Complexity not showing?** → Click "Get Hint" first
+
+---
+
+## 📝 API Endpoints
+
+| Endpoint | Method | Purpose |
+|----------|--------|---------|
+| `/api/analyze` | POST | Get AI code analysis + complexity |
+| `/api/execute` | POST | Run C++ code with input |
+| `/api/chat` | POST | Chat with AI about code |
+
+---
+
 **Built with ❤️ for C++ developers who want real-time AI mentorship**
 
-*Powered by Groq's blazing-fast inference engine*
+*Powered by Groq's blazing-fast inference engine and Piston code execution*
+
+🌟 **Star this repo if you find it helpful!**
